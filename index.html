@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>系统性红斑狼疮患教互动交流会 - 报名卡</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #f0f4f8;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+  }
+
+  .card {
+    background: #fff;
+    width: 360px;
+    padding: 28px 24px 24px;
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(37, 99, 180, 0.12);
+    text-align: center;
+  }
+
+  .banner {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    margin-bottom: 20px;
+  }
+
+  .banner-title {
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1.6;
+    letter-spacing: 1px;
+  }
+
+  .banner-sub {
+    font-size: 11px;
+    opacity: 0.8;
+    margin-top: 5px;
+    letter-spacing: 0.5px;
+  }
+
+  .info-block {
+    background: #f0f7ff;
+    border: 1.5px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  .info-row {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+  }
+
+  .info-row:last-child { margin-bottom: 0; }
+
+  .info-icon { width: 22px; flex-shrink: 0; font-size: 16px; }
+
+  .info-label { color: #93c5fd; font-size: 11px; margin-bottom: 2px; }
+
+  .info-value { font-size: 13.5px; color: #1e3a5f; font-weight: 500; line-height: 1.5; }
+
+  .scan-prompt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: #fff7ed;
+    border: 1.5px solid #fed7aa;
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 18px;
+    font-size: 13px;
+    color: #9a3412;
+  }
+
+  .scan-prompt .icon { font-size: 18px; }
+
+  .qr-section {
+    border-top: 1.5px dashed #bfdbfe;
+    padding-top: 16px;
+  }
+
+  .qr-title { font-size: 12px; color: #93c5fd; margin-bottom: 10px; letter-spacing: 0.5px; }
+
+  #qrcode {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 160px;
+  }
+
+  .qr-note { font-size: 11px; color: #bbb; margin-top: 8px; }
+
+  @media print {
+    body { background: #fff; }
+    .card { box-shadow: none; width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="card">
+  <div class="banner">
+    <div class="banner-title">系统性红斑狼疮<br>患教互动交流会</div>
+    <div class="banner-sub">SLE Patient Education Interactive Session</div>
+  </div>
+
+  <div class="info-block">
+    <div class="info-row">
+      <span class="info-icon">📅</span>
+      <div>
+        <div class="info-label">时间</div>
+        <div class="info-value">2026年5月8日（周五）<br>下午 15:00 - 16:00</div>
+      </div>
+    </div>
+    <div class="info-row">
+      <span class="info-icon">📍</span>
+      <div>
+        <div class="info-label">地点</div>
+        <div class="info-value">江阴市人民医院敔山湾院区<br>住院部23楼 示教室</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="scan-prompt">
+    <span class="icon">📱</span>
+    <span>请扫码填写报名信息</span>
+  </div>
+
+  <div class="qr-section">
+    <div class="qr-title">长按识别二维码 · 立即报名</div>
+    <div id="qrcode"></div>
+    <div class="qr-note">报名成功后请出示此页面签到</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+<script>
+  // 二维码指向表单页（相对路径，同目录下）
+  var formUrl = "./form.html";
+
+  var qrContainer = document.getElementById("qrcode");
+
+  QRCode.toCanvas(formUrl, {
+    width: 160,
+    margin: 2,
+    color: { dark: "#1d4ed8", light: "#ffffff" }
+  }, function(error, canvas) {
+    if (error) {
+      qrContainer.innerHTML = '<div style="font-size:12px;color:#93c5fd;">表单：<span style="word-break:break-all;font-size:11px;">' + formUrl + '</span></div>';
+      return;
+    }
+    canvas.style.borderRadius = "6px";
+    canvas.style.display = "block";
+    qrContainer.appendChild(canvas);
+  });
+</script>
+</body>
+</html>

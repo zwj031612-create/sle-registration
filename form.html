@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>活动报名 - 系统性红斑狼疮患教互动交流会</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: linear-gradient(135deg, #eff6ff, #dbeafe);
+    min-height: 100vh;
+    font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 16px 40px;
+  }
+
+  .header-card {
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #fff;
+    border-radius: 0 0 24px 24px;
+    padding: 28px 24px 32px;
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(37, 99, 180, 0.25);
+  }
+
+  .header-card .tag {
+    display: inline-block;
+    background: rgba(255,255,255,0.2);
+    border-radius: 20px;
+    padding: 4px 14px;
+    font-size: 12px;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+
+  .header-card h1 { font-size: 20px; font-weight: 700; line-height: 1.5; letter-spacing: 1px; }
+
+  .header-card .event-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 16px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    padding: 12px 16px;
+    text-align: left;
+  }
+
+  .event-info-row { display: flex; align-items: center; gap: 8px; font-size: 13.5px; opacity: 0.95; }
+  .event-info-row .icon { font-size: 16px; width: 20px; text-align: center; flex-shrink: 0; }
+
+  .form-card {
+    background: #fff;
+    border-radius: 20px;
+    padding: 24px 20px;
+    width: 100%;
+    max-width: 480px;
+    margin-top: -12px;
+    box-shadow: 0 4px 24px rgba(37, 99, 180, 0.1);
+  }
+
+  .form-title { font-size: 15px; font-weight: 600; color: #1e3a5f; margin-bottom: 4px; }
+  .form-desc { font-size: 12.5px; color: #93c5fd; margin-bottom: 20px; }
+
+  .field { margin-bottom: 18px; }
+
+  .field-label {
+    font-size: 13.5px;
+    color: #374151;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .field-label .required { color: #ef4444; font-size: 14px; }
+
+  .field input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d1d5db;
+    border-radius: 12px;
+    font-size: 15px;
+    font-family: inherit;
+    color: #111827;
+    background: #f9fafb;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    outline: none;
+    -webkit-appearance: none;
+  }
+
+  .field input:focus {
+    border-color: #3b82f6;
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+  }
+
+  .field input::placeholder { color: #9ca3af; }
+  .field input.error { border-color: #ef4444; background: #fef2f2; }
+  .field .error-msg { font-size: 11.5px; color: #ef4444; margin-top: 5px; display: none; }
+  .field.has-error .error-msg { display: block; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #2563eb, #3b82f6);
+    color: #fff;
+    border: none;
+    border-radius: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    font-family: inherit;
+    cursor: pointer;
+    letter-spacing: 2px;
+    box-shadow: 0 4px 16px rgba(37, 99, 180, 0.3);
+    transition: transform 0.15s, box-shadow 0.15s;
+    margin-top: 6px;
+  }
+
+  .submit-btn:active { transform: scale(0.98); box-shadow: 0 2px 8px rgba(37, 99, 180, 0.3); }
+  .submit-btn:disabled { background: #93c5fd; box-shadow: none; cursor: not-allowed; }
+
+  .success-card {
+    display: none;
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px 24px;
+    width: 100%;
+    max-width: 480px;
+    margin-top: -12px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(37, 99, 180, 0.1);
+  }
+
+  .success-card.show { display: block; }
+
+  .success-icon {
+    width: 72px;
+    height: 72px;
+    background: linear-gradient(135deg, #10b981, #34d399);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 20px;
+    font-size: 36px;
+    box-shadow: 0 4px 16px rgba(16, 185, 129, 0.3);
+  }
+
+  .success-card h2 { font-size: 20px; color: #1e3a5f; margin-bottom: 8px; }
+  .success-card p { font-size: 13.5px; color: #6b7280; line-height: 1.6; margin-bottom: 20px; }
+
+  .success-info { background: #f0f7ff; border-radius: 12px; padding: 16px; text-align: left; font-size: 13.5px; color: #374151; }
+  .success-info div { display: flex; gap: 8px; margin-bottom: 8px; }
+  .success-info div:last-child { margin-bottom: 0; }
+  .success-info .icon { font-size: 16px; }
+
+  .footer { margin-top: 24px; font-size: 11.5px; color: #93c5fd; text-align: center; }
+
+  body.submitted .form-card { display: none; }
+  body.submitted .header-card { display: none; }
+  body.submitted .footer { display: none; }
+  body:not(.submitted) .success-card { display: none; }
+</style>
+</head>
+<body>
+
+<div class="header-card">
+  <div class="tag">患教活动</div>
+  <h1>系统性红斑狼疮<br>患教互动交流会</h1>
+  <div class="event-info">
+    <div class="event-info-row">
+      <span class="icon">📅</span>
+      <span>2026年5月8日（周五）15:00 - 16:00</span>
+    </div>
+    <div class="event-info-row">
+      <span class="icon">📍</span>
+      <span>江阴市人民医院敔山湾院区<br>住院部23楼 示教室</span>
+    </div>
+  </div>
+</div>
+
+<div class="form-card" id="formCard">
+  <div class="form-title">📝 填写报名信息</div>
+  <div class="form-desc">请如实填写以下信息，以便我们会前联系您</div>
+
+  <div class="field" id="nameField">
+    <div class="field-label">姓名 <span class="required">*</span></div>
+    <input type="text" id="nameInput" placeholder="请输入您的姓名" maxlength="20" autocomplete="off">
+    <div class="error-msg">请输入姓名</div>
+  </div>
+
+  <div class="field" id="phoneField">
+    <div class="field-label">电话号码 <span class="required">*</span></div>
+    <input type="tel" id="phoneInput" placeholder="请输入您的手机号码" maxlength="11" inputmode="numeric" autocomplete="tel">
+    <div class="error-msg">请输入正确的手机号码（11位数字）</div>
+  </div>
+
+  <button class="submit-btn" id="submitBtn" onclick="submitForm()">提 交 报 名</button>
+</div>
+
+<div class="success-card" id="successCard">
+  <div class="success-icon">✓</div>
+  <h2>报名成功！</h2>
+  <p>感谢您的参与，我们会在活动前与您联系确认。现场请出示此页面完成签到。</p>
+  <div class="success-info">
+    <div><span class="icon">📅</span><span>2026年5月8日（周五）15:00</span></div>
+    <div><span class="icon">📍</span><span>江阴市人民医院敔山湾院区<br>住院部23楼 示教室</span></div>
+    <div><span class="icon">👤</span><span id="confirmName"></span></div>
+  </div>
+</div>
+
+<div class="footer">如有疑问，请联系活动组织方</div>
+
+<script>
+  function validatePhone(val) {
+    return /^1[3-9]\d{9}$/.test(val);
+  }
+
+  function submitForm() {
+    var name = document.getElementById("nameInput");
+    var phone = document.getElementById("phoneInput");
+    var nameField = document.getElementById("nameField");
+    var phoneField = document.getElementById("phoneField");
+    var btn = document.getElementById("submitBtn");
+    var ok = true;
+
+    if (!name.value.trim()) {
+      name.classList.add("error");
+      nameField.classList.add("has-error");
+      ok = false;
+    } else {
+      name.classList.remove("error");
+      nameField.classList.remove("has-error");
+    }
+
+    if (!validatePhone(phone.value.trim())) {
+      phone.classList.add("error");
+      phoneField.classList.add("has-error");
+      ok = false;
+    } else {
+      phone.classList.remove("error");
+      phoneField.classList.remove("has-error");
+    }
+
+    if (!ok) return;
+
+    btn.textContent = "提交中...";
+    btn.disabled = true;
+
+    setTimeout(function() {
+      document.getElementById("confirmName").textContent = name.value.trim();
+      document.body.classList.add("submitted");
+      document.getElementById("successCard").classList.add("show");
+
+      var registrations = JSON.parse(localStorage.getItem("sle_registrations") || "[]");
+      registrations.push({
+        name: name.value.trim(),
+        phone: phone.value.trim(),
+        time: new Date().toLocaleString("zh-CN")
+      });
+      localStorage.setItem("sle_registrations", JSON.stringify(registrations));
+    }, 800);
+  }
+
+  ["nameInput", "phoneInput"].forEach(function(id) {
+    document.getElementById(id).addEventListener("input", function() {
+      this.classList.remove("error");
+      this.parentElement.classList.remove("has-error");
+    });
+  });
+</script>
+</body>
+</html>
